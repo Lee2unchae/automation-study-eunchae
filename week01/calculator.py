@@ -12,7 +12,7 @@ print(a,"+", b, "=", sum)
 print(a,"-", b, "=", subtraction) 
 print(a,"*", b, "=", product)
 
-# 두 숫자 나누기(예외)
+#두 숫자 나누기(예외)
 if b == 0:
     print("0으로 나눌 수 없습니다.") #b값이 0이라면 해당 문구 출력
 else:
