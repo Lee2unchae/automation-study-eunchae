@@ -14,4 +14,4 @@ for member in members:
 #30세 이상 회원만 별도로 출력
 for member in members:
     if member["age"] >= 30:  #30세 이상인지 나이 비교
-        print("30세 이상 회원:", member["name"])
+        print("30세 이상 회원:", member["name"]) 
