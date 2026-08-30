@@ -1,0 +1,11 @@
+{
+    "total_count": 7,
+    "pass_count": 4,
+    "fail_count": 3,
+    "success_rate": 57.14,
+    "failed_tests": [
+        "Payment_Test",
+        "Profile_Update_Test",
+        "Coupon_Apply_Test"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "valid_emails": [
+        {
+            "email": "eunchae010@naver.com",
+            "userid": "eunchae010",
+            "domain": "naver.com"
+        },
+        {
+            "email": "dmsco@gmail.com",
+            "userid": "dmsco",
+            "domain": "gmail.com"
+        },
+        {
+            "email": "eunchaelee@l-walk.com",
+            "userid": "eunchaelee",
+            "domain": "l-walk.com"
+        },
+        {
+            "email": "dlapdlf@gmail.com",
+            "userid": "dlapdlf",
+            "domain": "gmail.com"
+        },
+        {
+            "email": "lwalk@l-walk.com",
+            "userid": "lwalk",
+            "domain": "l-walk.com"
+        }
+    ],
+    "invalid_emails": [
+        "dldmsconaver.com",
+        "wkfahtehlsdlapdlf@@@@gmail.com",
+        "honggildong@",
+        "rlfehd@gmail"
+    ],
+    "domain_count": {
+        "naver.com": 1,
+        "gmail.com": 2,
+        "l-walk.com": 2
+    }
+}
