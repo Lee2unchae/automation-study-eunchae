@@ -26,15 +26,17 @@ def analyze_logs(logs):
         
         if len(parts) == 3:
             test_name = parts[1].strip() #테스트명
-            result = parts[2].strip() #결과
+            result = parts[2].strip().upper() #대소문자 구분 없이 처리하기 위해 대문자로 변환
             
-            if result == "PASS": #결과가 PASS인 경우
+            if result == "PASS" or result.startswith("PASS"): #결과가 PASS 또는 PASSED 등인 경우
                 total_count += 1
                 pass_count += 1
-            elif result == "FAIL": #결과가 FAIL인 경우
+            elif result == "FAIL" or result.startswith("FAIL"): #결과가 FAIL 또는 FAILED 등인 경우
                 total_count += 1
                 fail_count += 1
                 failed_tests.append(test_name)  # 결과가 FAIL인 경우 테스트 이름 저장
+            else:
+                print("잘못된 결과값 형식", [log]) # PASS/FAIL 외의 다른 값이 들어온 경우 처리
         else:
             print("잘못된 로그 형식", [log])
             

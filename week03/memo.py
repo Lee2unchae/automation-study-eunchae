@@ -1,5 +1,5 @@
-#과제 2. 메모 관리 프로그램
 import json
+from datetime import datetime
 
 #메모 불러오기
 def load_memo():
@@ -7,7 +7,11 @@ def load_memo():
         with open("memos.json", "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
-        return [] #파일이 없으면 빈 리스트로 시작
+        return [] #파일이 없으면 빈 리스트로 시작   
+    except json.JSONDecodeError:
+        return []  # 파일 손상 시 예외 처리
+    except Exception as e:
+        return []  # 혹시 모를 기타 예외 처리
 
 #메모 저장하기
 def save_memo(memos):
@@ -36,7 +40,19 @@ def main():
             print("추가할 메모를 입력하세요")
             add_memo = input()
             if add_memo:
-                memos.append(add_memo)
+                # id : 기존 메모가 있으면 최대 id + 1, 없으면 1
+                memo_id = max([m["id"] for m in memos], default=0) + 1 if memos else 1
+                # 작성일 생성
+                created = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+                # 식별값, 내용, 작성일을 딕셔너리로 저장
+                memo_data = {
+                    "id": memo_id,
+                    "content": add_memo,
+                    "created": created
+                }
+
+                memos.append(memo_data)
                 save_memo(memos)
                 print("메모 저장 완료")
             else:
@@ -47,9 +63,13 @@ def main():
             if not memos:
                 print("저장된 메모 없음")
             else:
+                print("전체 메모 조회")
                 for i, memo in enumerate(memos, 1):
-                    print("전체 메모 조회: ")
-                    print(memo)
+                    # 딕셔너리 또는 기존 문자열 형식 모두 대응하여 출력
+                    if isinstance(memo, dict):
+                        print(f"{memo['id']} {memo['content']} {memo['created']}")
+                    else:
+                        print(memo)
 
         #3. 메모 검색
         elif a == "3":
@@ -61,12 +81,18 @@ def main():
                 found = False
 
                 for index, memo in enumerate(memos, 1):
-                    # 대소문자 구분 없이 검색하기 위해 .lower() 사용
-                    if search.lower() in memo.lower():
-                        print("검색 결과: ", memo)
+                    memo_text = memo["content"] if isinstance(memo, dict) else memo
+
+                    if search.lower() in memo_text.lower():
+                        if not found:
+                            print("검색 결과")
+                        if isinstance(memo, dict):
+                            print(f"{memo['id']} {memo['content']} {memo['created']}")
+                        else:
+                            print(memo)
                         found = True  # 검색 결과를 찾았으므로 True로 변경
                 
-                # 끝까지 돌았는데 일치하는 메모가 하나도 없는 경우
+                # 일치하는 메모가 없는 경우
                 if not found:
                     print("검색 결과가 없습니다.")
 
@@ -80,8 +106,3 @@ def main():
             print("잘못된 입력입니다. 기능 번호를 확인해주세요.")
 
 main()
-
-    
-
-    
-
