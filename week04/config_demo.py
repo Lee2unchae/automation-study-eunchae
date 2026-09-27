@@ -9,9 +9,20 @@ user_id = os.getenv("USER_ID")
 user_pw = os.getenv("USER_PW")
 base_url = os.getenv("BASE_URL")
 
-# 프로그램 실행에 반드시 필요한 설정값이 없는 경우 사용자가 원인을 알 수 있도록 처리
-if not user_id or not user_pw or not base_url:
-    print("필요한 설정값이 없습니다.")
+# 필수 설정값 개별 검증
+missing_keys = []
+if not user_id:
+    missing_keys.append("USER_ID")
+if not user_pw:
+    missing_keys.append("USER_PW")
+if not base_url:
+    missing_keys.append("BASE_URL")
+
+# 검증 결과에 따른 처리
+if missing_keys:
+    missing_str = ", ".join(missing_keys)
+    print(f"[오류] 필수 환경변수가 누락되었습니다: {missing_str}")
+    print("      .env 파일을 확인하여 해당 항목을 설정해 주세요.")
 else:
     # 비밀번호 마스킹 처리
     masked_pw = user_pw[:2] + "*" * (len(user_pw) - 2) if len(user_pw) > 2 else "****"
