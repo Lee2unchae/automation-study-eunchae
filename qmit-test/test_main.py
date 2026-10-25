@@ -4,7 +4,7 @@ URL = "https://v369.dev.l-walk.com"
 
 def test_메인_페이지_타이틀(page: Page):
     page.goto(URL)
-    expect(page).to_have_title("큐밋! 타이틀 다르게 적기")
+    expect(page).to_have_title("큐밋! SW 테스트 프로젝트 아웃소싱 플랫폼")
 
 def test_로그인_버튼이_보인다(page: Page):
     page.goto(URL)
