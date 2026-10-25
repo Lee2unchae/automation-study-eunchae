@@ -65,7 +65,6 @@ def main():
                 if save_memo(memos):
                     print("메모 저장 완료")
                 else:
-                    # 저장 실패 시 추가했던 데이터 원복
                     print("메모 저장에 실패하였습니다.")
             else:
                 print("빈 메모는 저장할 수 없습니다.")
