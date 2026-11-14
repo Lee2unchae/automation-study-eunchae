@@ -10,7 +10,7 @@ QMIT_ID = os.getenv("QMIT_ID")
 QMIT_PW = os.getenv("QMIT_PW")
 
 def test_프로젝트_찾기(page: Page):
-    page.goto(f"https://v369.dev.l-walk.com/")
+    page.goto(BASE_URL)
     page.get_by_text("프로젝트 찾기").click()
 
     #카드 갯수
@@ -31,7 +31,8 @@ def test_프로젝트_찾기(page: Page):
     page.get_by_text(re.compile(r"^상주$")).first.click()
     reside_cards = page.get_by_test_id("project-list-item")
     reside_count = reside_cards.count()
-    expect(reside_cards).to_have_count
+    expect(reside_cards).to_have_count(reside_count)
+    print(f"상주 필터 카드 갯수 : {reside_count}")
 
     #세번째 카드의 제목
     third_card = page.get_by_test_id("project-list-item").nth(2).locator("p").nth(1).inner_text()
